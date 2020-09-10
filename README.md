@@ -1,5 +1,3 @@
-# nCDC-ASP
-
 
 nCDC-ASP SYSTEM:
 
