@@ -7,10 +7,10 @@ Features of NCDC-ASP System:
 - Reason with basic, disjunctive information
 - Utilize commonsense knowledge by default CDC constraints
 - Infer unknown cardinal directions between objects
+- Layout optimization for occupied area of objects
 - Alternative domains: Connected (Reg) or possibly disconnected (Reg*)
 
 Original and improved formulation for deciding consistency and checking connectedness have been developed. Besides, reducing the necessary grid size has been performed for computational efficiency. All ASP programs are in ASP Core-2 Format.
-
 
 
 
@@ -37,7 +37,6 @@ u: target object,  u: reference object,  r: tiles of CDC relation (according to 
 Disjunctive default CDC constraints:
 disjdefaultrelation(u,v,i,r)  atoms for Disjunctive default CDC constraint
 u: target object,  u: reference object, i:index of disjunct, r: tiles of each basic relation (according to above encoding)
-
 
 
 
@@ -78,6 +77,9 @@ add "original_connected.lp"  to the relevant command above for checking connecte
 OR
 add "improved_connected.lp"  to the relevant command above which is the improved program checking connectedness
 
+7) For layout optimization: add "min_intersect.lp" to minimize the number of overlapping objects, to the relevant command above
+AND/OR
+Add "minim_cells.lp" to minimize the area occupied by objects, to the relevant command above
 
 
 
@@ -87,11 +89,9 @@ To infer missing CDC relations in the network, replace "original_consistency.lp"
 
 
 
-
 EXAMPLE:
 
 See the example instance file under ASP Programs: example_instance.lp
-
 
 
 
@@ -103,12 +103,11 @@ scenario1.lp : Meeting scenario
 scenario2.lp : Missing child scenario
 scenario3.lp : Tabletop placement scenario
 
-To find the solution of these example scenarios, run the following commands:
+To find the solution of these example scenarios (with layout optimization), run the following commands:
 
-./clingo grid_enum.lp inference.lp improved_connected.lp scenario1.lp
-./clingo grid_enum.lp inference.lp disjunctive.lp default.lp scenario2.lp
-./clingo grid_enum.lp inference.lp improved_connected.lp disjunctive.lp default.lp scenario3.lp
-
+./clingo grid_enum.lp inference.lp improved_connected.lp minim_cells.lp min_intersect.lp scenario1.lp
+./clingo grid_enum.lp inference.lp disjunctive.lp default.lp minim_cells.lp min_intersect.lp scenario2.lp
+./clingo grid_enum.lp inference.lp improved_connected.lp disjunctive.lp default.lp minim_cells.lp min_intersect.lp scenario3.lp
 
 
 
@@ -120,4 +119,3 @@ ASP encoding of the input for experimental evaluations
 nCDC-Handcrafted-Benchmarks.zip : ASP encoding of Handcrafted Benchmark Instances for nCDC
 nCDC-Random-Benchmarks.zip : ASP encoding of Random Benchmark Instances for nCDC
 LiuetalInstance-Code.zip : Instances and code for Comparison to Liu et al (2010)
-
