@@ -20,4 +20,3 @@ connected(K,X1,Y1,X3,Y3) :- connected(K,X1,Y1,X2,Y2), connected(K,X2,Y2,X3,Y3).
 % Any two cells of a region must be connected to each other
 
 :- not connected(K,X1,Y1,X2,Y2), occupy(K,X1,Y1), occupy(K,X2,Y2), region(K).
-
