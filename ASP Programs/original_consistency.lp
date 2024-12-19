@@ -88,4 +88,3 @@ bottom(K,0..Y1-1) :- infy(K,Y1).
 
 
 #show occupy/3.
-
