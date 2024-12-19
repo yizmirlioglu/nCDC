@@ -4,7 +4,7 @@
 % This program checks consistency of the nCDC network and infers all missing CDC relations
 % based on improved ASP formulation of basic CDC networks
 
-1{inferrel(K,L,J): alltiles(J)} :- not existrelation(K,L), region(K), region(L).
+1{inferrel(K,L,J): alltiles(J)} :- K!=L, not existrelation(K,L), region(K), region(L).
 
 existinferrel(K,L) :- inferrel(K,L,J).
 
@@ -121,27 +121,25 @@ bottom(K,0..Y1-1) :- infy(K,Y1).
 
 %  Check condition (C2) for basic and inferred CDC constraints
 
-:- not inferrel(K,L,n), not relation(K,L,n), 1{occupy(K,X,Y): hbox(L,X), top(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,n), not relation(K,L,n), occupy(K,X,Y), hbox(L,X), top(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,s), not relation(K,L,s), 1{occupy(K,X,Y): hbox(L,X), bottom(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,s), not relation(K,L,s), occupy(K,X,Y), hbox(L,X), bottom(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,e), not relation(K,L,e), 1{occupy(K,X,Y): right(L,X), vbox(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,e), not relation(K,L,e), occupy(K,X,Y), right(L,X), vbox(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,w), not relation(K,L,w), 1{occupy(K,X,Y): left(L,X), vbox(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,w), not relation(K,L,w), occupy(K,X,Y), left(L,X), vbox(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,nw), not relation(K,L,nw), 1{occupy(K,X,Y): left(L,X), top(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,nw), not relation(K,L,nw), occupy(K,X,Y), left(L,X), top(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,sw), not relation(K,L,sw), 1{occupy(K,X,Y): left(L,X), bottom(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,sw), not relation(K,L,sw), occupy(K,X,Y), left(L,X), bottom(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,ne), not relation(K,L,ne), 1{occupy(K,X,Y): right(L,X), top(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,ne), not relation(K,L,ne), occupy(K,X,Y), right(L,X), top(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,se), not relation(K,L,se), 1{occupy(K,X,Y): right(L,X), bottom(L,Y)}, region(K), region(L).
+:- not inferrel(K,L,se), not relation(K,L,se), occupy(K,X,Y), right(L,X), bottom(L,Y), region(K), region(L).
 
-:- not inferrel(K,L,o), not relation(K,L,o), 1{occupy(K,X,Y): hbox(L,X), vbox(L,Y)}, region(K), region(L).
-
+:- not inferrel(K,L,o), not relation(K,L,o), occupy(K,X,Y), hbox(L,X), vbox(L,Y), region(K), region(L).
 
 
 
 #show inferrel/3.
 #show occupy/3.
-
